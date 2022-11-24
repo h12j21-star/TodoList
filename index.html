@@ -9,25 +9,28 @@
   </head>
   <body>
     <div class="wrapper">
-      <header>
-        <h1>투두리스트</h1>
-        <label
+      <header class="todoHeader">
+        <h1 class="ir">투두리스트</h1>
+        <label class="colorPicker"
           >Color Picker!
-          <input type="color" />
+          <input class="inpColor" type="color" />
         </label>
         <input class="inp_name" type="text" placeholder="이름을 입력하세요" />
-        <button>등록!</button>
+        <button class="btn todoName">등록!</button>
         <p class="introduce off">hello <span class="name"></span></p>
       </header>
-      <main>
-        <section>
+      <main class="todoMain">
+        <section class="todoSection">
           <h2>TO DO LIST</h2>
           <input class="inpTodo" placeholder="할일을 등록하세요" />
-          <button>등록!</button>
-          <ul class="listTodo"></ul>
+          <button class="btn todoPush">등록!</button>
+          <ul class="todoList"></ul>
         </section>
       </main>
-      <footer>만든이 hyeonji choi</footer>
+      <footer>
+        <p>만든이 hyeonji choi</p>
+      </footer>
     </div>
+    <script src="./src/script.js"></script>
   </body>
 </html>
