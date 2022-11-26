@@ -10,19 +10,42 @@ const pushTodoBtn = todoMain.querySelector('.todoPush');
 const todoList = todoMain.querySelector('.todList');
 
 
-const colorChange = (e) =>{
-  let pickColor = e.target.value;
-  todoMain.style.backgroundColor=pickColor;
-}
-colorPicker.addEventListener('input',colorChange);
+//할일 저장하기
+// {todolist : [todos:{todo:[todo1,todo2],state:false},color:white]
 
-//상태관리 코드 짜기
-//localstorge 저장 , 불러오기
-// 했다 안했다는 true false형태로 상태저장하기
-// 할일 리스트는 추가되거나 삭제되면 상태변경하기
-// 인풋창 입력후 지우기
-// 상태는 setState로 바뀌게 하기
-pushNameBtn.addEventListener('click',()=>{
-  let userName = inpName.value
-  introduceName.textContent=userName;
-})
+const todoListItem=JSON.parse(localStorage.getItem('todoListItem')) || [{todos:{todo:[]},state:false,color:colorPicker.value},]
+
+
+function setUp(){
+  setStoreItem();
+  render();
+}
+function getStoreItem(item){
+  const todoListItem=JSON.parse(localStorage.getItem('todoListItem')) || [{todos:{todo:[]},state:false,color:colorPicker.value}]
+  return todoListItem[0][item]
+
+}
+function render(){
+  //NAME
+  let getUserName = localStorage.getItem('name')
+introduce.textContent = getUserName ? introduce.textContent + getUserName : 'hello' 
+}
+
+function setStoreItem(){
+  const storeName = () =>{
+    let userName = inpName.value;
+    localStorage.setItem('name',userName);
+    introduce.textContent="hello ";
+    introduce.textContent = introduce.textContent + userName;
+  }
+  pushNameBtn.addEventListener('click',storeName);
+}
+
+
+
+
+
+
+
+
+setUp();
