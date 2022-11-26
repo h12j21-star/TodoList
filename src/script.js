@@ -28,7 +28,11 @@ function getStoreItem(item){
 function render(){
   //NAME
   let getUserName = localStorage.getItem('name')
-introduce.textContent = getUserName ? introduce.textContent + getUserName : 'hello' 
+  introduce.textContent = getUserName ? introduce.textContent + getUserName : 'hello' 
+  let getColor = getStoreItem('color');
+  todoMain.style.
+  backgroundColor=getColor;
+  colorPicker.value=getColor;
 }
 
 function setStoreItem(){
@@ -38,7 +42,15 @@ function setStoreItem(){
     introduce.textContent="hello ";
     introduce.textContent = introduce.textContent + userName;
   }
+  const storeColor = (e) =>{
+    let pickColor = e.target.value;
+    todoMain.style.
+    backgroundColor=pickColor;
+    todoListItem[0].color=pickColor;
+    localStorage.setItem('todoListItem',JSON.stringify(todoListItem))
+  }
   pushNameBtn.addEventListener('click',storeName);
+  colorPicker.addEventListener('input',storeColor);
 }
 
 
