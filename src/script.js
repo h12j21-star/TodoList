@@ -7,20 +7,23 @@ const introduceName = Header.querySelector('.introduce span')
 const todoMain = document.querySelector('.todoMain')
 const todoInput = todoMain.querySelector('.inpTodo');
 const pushTodoBtn = todoMain.querySelector('.todoPush');
-const todoList = todoMain.querySelector('.todList');
+const todoList = todoMain.querySelector('.todoList');
 
 //할일 저장하기
-const todoListItem=JSON.parse(localStorage.getItem('todoListItem')) || [{Todos:[]}]
+const todoListItem=JSON.parse(localStorage.getItem('todoListItem')) || [];
 
 function setUp(){
   setStoreItem();
   render();
+  setState();
+ 
 }
-
-function getStoreItem(){
-  const todoListItem=JSON.parse(localStorage.getItem('todoListItem')) || [{Todos:[]}]
+function getStoretoDo(){
+  let getTodo = JSON.parse(localStorage.getItem('todoListItem'))
+  let arrTodo = getTodo ? getTodo : [];
+  console.log(getTodo)
+  return arrTodo;
 }
-
 function render(){
   //NAME
   let getUserName = localStorage.getItem('Name')
@@ -31,16 +34,33 @@ function render(){
   backgroundColor=getColor;
   colorPicker.value=getColor;
   //TODO
- let getTodo = localStorage.getItem('Todos')
+
+if(  getStoretoDo().length!==0){
+  getStoretoDo().forEach((todo)=>{
+    const done = document.createElement('button');
+    done.textContent="완료"
+    done.className='donebtn'
+    const del = document.createElement('button');
+    del.textContent="삭제"
+    del.className='deletebtn'
+    const todoLi = document.createElement('li');
+    let todoItem = todo['Todos'][0]['ToDo']
+    todoLi.textContent = (JSON.stringify(todoItem)).replaceAll('"',"");
+    todoLi.append(done,del);
+    todoList.append(todoLi);
+    
+  })
+  
+  }
 
 }
-
 function setStoreItem(){
   const storeName = () =>{
     let userName = inpName.value;
     localStorage.setItem('Name',userName);
     introduce.textContent="hello ";
     introduce.textContent = introduce.textContent + userName;
+
   }
   const storeColor = (e) =>{
     let pickColor = e.target.value;
@@ -54,21 +74,47 @@ function setStoreItem(){
   //3-1.새로고침해도 목록이 사라지지 않음
   //4. 새로고침해도 존재함
   const storeTodo = (e) =>{
-    const todoList = todoMain.querySelector('.todoList');
     const todoLi = document.createElement('li');
+    const done = document.createElement('button');
+    done.textContent="완료"
+    done.className='donebtn'
+    const del = document.createElement('button');
+    del.textContent="삭제"
+    del.className='deletebtn'
     todoLi.textContent = todoInput.value;
+    todoLi.append(done,del);
     todoList.append(todoLi);
-    todoListItem[0].Todos.push({ToDo:todoInput.value,state:false})
-    console.log( todoListItem[0])
+    let ObjTodo = {Todos:[{
+      ToDo:todoInput.value,
+      State:false
+    }]}
+    todoListItem.push(ObjTodo)
     localStorage.setItem('todoListItem',JSON.stringify(todoListItem))
- 
-  }
-  const storeState = () =>{
-
+    setState(); 
   }
   pushNameBtn.addEventListener('click',storeName);
   colorPicker.addEventListener('input',storeColor);
   pushTodoBtn.addEventListener('click',storeTodo);
+}
+function setState(){
+  const doneBtn = document.querySelectorAll('.todoList li .donebtn');
+  console.log(doneBtn)
+  doneBtn.forEach((btn,index)=>{
+    btn.addEventListener('click',storeState);
+   
+  })
+}
+const storeState = (e) =>{
+  let targetLi = e.target.parentElement
+  targetLi.classList.toggle('done')
+  let todoState = todoListItem[0]['Todos'][0]['State']
+  if(todoState){
+    todoListItem[0]['Todos'][0]['State']=false;
+  }
+  else{
+    todoListItem[0]['Todos'][0]['State']=true;
+  }
+  localStorage.setItem('todoListItem',JSON.stringify(todoListItem))
 }
 
 setUp();

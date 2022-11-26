@@ -1,3 +1,6 @@
 .off{
   display:none;
 }
+.done{
+  text-decoration:line-through
+}
