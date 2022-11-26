@@ -4,3 +4,6 @@
 .done{
   text-decoration:line-through
 }
+ul{
+  list-style: none;
+}

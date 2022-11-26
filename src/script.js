@@ -82,12 +82,17 @@ function setStoreItem(){
     del.textContent="삭제"
     del.className='deletebtn'
     todoLi.textContent = todoInput.value;
+    if(!todoLi.textContent){
+      return;
+    }
+    todoInput.value="";
     todoLi.append(done,del);
     todoList.append(todoLi);
     let ObjTodo = {Todos:[{
       ToDo:todoInput.value,
       State:false
     }]}
+
     todoListItem.push(ObjTodo)
     localStorage.setItem('todoListItem',JSON.stringify(todoListItem))
     setState(); 
@@ -122,12 +127,14 @@ function delteTodo(){
   deleteBtn.forEach((btn)=>{
     btn.addEventListener('click',deletItem)
   })
-  
-
 }
-
 const deletItem = (e) =>{
   let targetLi = e.target.parentElement
   targetLi.remove();
+  todoListItem[0]['Todos'][0];
+  console.log( todoListItem)
+  console.log( todoListItem[0])
+  
+  localStorage.setItem('todoListItem',JSON.stringify(todoListItem))
 }
 setUp();
