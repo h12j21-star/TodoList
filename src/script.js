@@ -16,7 +16,7 @@ function setUp(){
   setStoreItem();
   render();
   setState();
- 
+  delteTodo()
 }
 function getStoretoDo(){
   let getTodo = JSON.parse(localStorage.getItem('todoListItem'))
@@ -91,6 +91,7 @@ function setStoreItem(){
     todoListItem.push(ObjTodo)
     localStorage.setItem('todoListItem',JSON.stringify(todoListItem))
     setState(); 
+    delteTodo()
   }
   pushNameBtn.addEventListener('click',storeName);
   colorPicker.addEventListener('input',storeColor);
@@ -116,5 +117,17 @@ const storeState = (e) =>{
   }
   localStorage.setItem('todoListItem',JSON.stringify(todoListItem))
 }
+function delteTodo(){
+  const deleteBtn = document.querySelectorAll('.todoList li .deletebtn');
+  deleteBtn.forEach((btn)=>{
+    btn.addEventListener('click',deletItem)
+  })
+  
 
+}
+
+const deletItem = (e) =>{
+  let targetLi = e.target.parentElement
+  targetLi.remove();
+}
 setUp();
