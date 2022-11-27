@@ -1,9 +1,38 @@
+.wrapper{
+  text-align: center;
+  margin:0 auto;
+  width:50%;
+  border-radius: 20%;
+}
+.ir{
+  position: absolute;
+	clip: rect(0 0 0 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+}
 .off{
   display:none;
 }
 .done{
   text-decoration:line-through
 }
-ul{
+.todoList{
   list-style: none;
+  padding:20px;
+  font-size: 12px;
+ 
+}
+.todoList li{
+  background-color: white;
+  margin:10px;
+  text-align: left;
+
+}
+.donebtn,.deletebtn{
+  background-color:black;
+  color:white;
+  font-size: 12px;;
+  border-radius: 10%;
 }
