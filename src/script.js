@@ -55,7 +55,8 @@ function ToDorender(){
     li.append(done,del)
     todoList.append(li);
     Selectbtn();
-    SelectDelbtn()  })
+    SelectDelbtn()
+    })
     checkDone()
  
 }
@@ -107,8 +108,6 @@ function deleteToDo(e){
   let targetLi = e.target.parentElement
   targetLi.remove();
   todoListItem.splice(targetLi.id,1)
-  todoListItem.length=0
-  ToDorender()
   setStoreItem();
 }
 
