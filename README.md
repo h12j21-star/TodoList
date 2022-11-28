@@ -1,4 +1,4 @@
-# TodoList_React
+# TodoList
 
 ##기능
 
@@ -11,6 +11,6 @@
 ## localstorage
 
 저장 내용
-
-- {name:'name'}
-- { todoListItem : {state:true, todos:[todo1,todo2],color:white}
+- {Name:'name'}
+- {Color:'color'}
+- { todoListItem :{Todos:[{ToDo:[todo1],state:false},{Todo:[todo1],state:false]}
