@@ -4,6 +4,7 @@ const inpName = Header.querySelector('.inpName');
 const pushNameBtn = Header.querySelector('.pushName')
 const introduce = Header.querySelector('.introduce');
 const introduceName = Header.querySelector('.introduce span')
+const userName = Header.querySelector('.name')
 const todoMain = document.querySelector('.todoMain')
 const todoInput = todoMain.querySelector('.inpTodo');
 const pushTodoBtn = todoMain.querySelector('.todoPush');
@@ -13,20 +14,16 @@ const todoList = todoMain.querySelector('.todoList');
 let todoListItem=JSON.parse(localStorage.getItem('todoListItem')) || [];
 
 function setUp(){
-  Namerender();
+  //Namerender();
   Colorrender();
   ToDorender();
- 
 }
-// function getStoretoDo(){
-//   let getTodo = JSON.parse(localStorage.getItem('todoListItem'))
-//   let arrTodo = getTodo ? getTodo : [];
-//   return arrTodo;
-// }
+
 function setStoreItem(){
   localStorage.setItem('todoListItem',JSON.stringify(todoListItem));
 }
-function storeTodo(){
+
+function changeTodo(){
   const li = document.querySelectorAll('.todoList li')
   li.forEach((li)=>{
     li.remove();
@@ -37,11 +34,13 @@ function storeTodo(){
   }]}
   todoListItem.push(ObjTodo);
   setStoreItem();
-  ToDorender()
+  ToDorender();
+  todoInput.value=""
 }
+
 //입력->저장
 function ToDorender(){
-  pushTodoBtn.addEventListener('click',storeTodo);
+  pushTodoBtn.addEventListener('click',changeTodo);
   todoListItem.forEach((todo,index)=>{
     const li = document.createElement('li');
     li.id = index 
@@ -56,9 +55,8 @@ function ToDorender(){
     todoList.append(li);
     Selectbtn();
     SelectDelbtn()
-    })
+  })
     checkDone()
- 
 }
 
 function checkDone(){
@@ -68,41 +66,41 @@ todoListItem.forEach((item,index)=>{
   if(item['Todos'][0]['State']){
     const li = document.getElementById(`${index}`)
     li.className='done'
-  }    
-})
-   
-  }
+   }    
+ })
+}
 
 function Selectbtn(){
   const statebtn = document.querySelectorAll('.donebtn');
   statebtn.forEach((btn)=>{
     btn.addEventListener('click',changeState);
-})
+ })
 }
 function changeState(e){  
   let targetLi = e.target.parentElement
   let state = todoListItem[targetLi.id]['Todos'][0]['State']
-  if(state===true){
+  
+  if(state){
       targetLi.classList.remove('done')
   todoListItem[targetLi.id]['Todos'][0]={
   ToDo: todoListItem[targetLi.id]['Todos'][0]['ToDo'],
       State:false
     };   
-  }
+}
   else{
     targetLi.classList.add('done')
   todoListItem[targetLi.id]['Todos'][0]={
   ToDo: todoListItem[targetLi.id]['Todos'][0]['ToDo'],
   State:true
-}
-  }
+   }
+ }
   setStoreItem();
 }
 function SelectDelbtn(){
   const statebtn = document.querySelectorAll('.deletebtn');
   statebtn.forEach((btn)=>{
     btn.addEventListener('click',deleteToDo);
-})
+ })
 }
 function deleteToDo(e){
   let targetLi = e.target.parentElement
@@ -111,44 +109,24 @@ function deleteToDo(e){
   setStoreItem();
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const storeName = () =>{
-    let userName = inpName.value;
-    localStorage.setItem('Name',userName);
-    
-  }
 const storeColor = (e) =>{
     let pickColor = e.target.value;
     localStorage.setItem('Color',pickColor)
-    
+    Colorrender()
   }
 
- 
-function Namerender(){
-  //NAME
+/*function Namerender(){
   let getUserName = localStorage.getItem('Name')
-  introduce.textContent = getUserName ? introduce.textContent + getUserName : 'hello' 
+  userName.textContent = getUserName ? getUserName : '' 
   pushNameBtn.addEventListener('click',storeName);
-}
+}*/
+/*const storeName = () =>{
+    let userName = inpName.value;
+    localStorage.setItem('Name',userName);
+    inpName.classList.toggle="off"
+    Namerender()
+  }*/
 function Colorrender(){
-  //COLOR
   let getColor = localStorage.getItem('Color');
   todoMain.style.
   backgroundColor=getColor;
