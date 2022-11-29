@@ -12,17 +12,14 @@
   width:300px;
   
 }
-
 .content-title{
   font-weight: 900;
 }
-
 .colorPicker{
   position:absolute;
   right:10px;
   top:10px;
   font-size:12px;
-
 }
 .introduce{
   margin-top:30px;
@@ -30,8 +27,8 @@
   font-size:16px;
 }
 .todoMain{
-  margin-top:30px;
-  
+  margin-top:30px; 
+  border-radius: 15px;
 }
 .off{
   display:none;
@@ -39,40 +36,48 @@
 .done{
   text-decoration:line-through
 }
-.todoSection {
-  border:1px solid #ddd
-}
 .todoSection .inpTodo{
+  font-size:12px;
+  padding:5px;
   margin-top:10px;
   margin-right:10px;
   width:200px;
+  border-radius: 15px;
+  border:0;
 }
 .todoSection .todoPush{
-  border:0 ;
-  background-color:white
+  font-size:12px;
+  padding:4px 10px;
+  border-radius:15px;
+  border:0;
+  background-color:ddd;
+  
+  
 }
 .todoList{
   list-style: none;
   padding:10px;
   font-size: 12px;
-  height:200px;
-
- 
+  
 }
 .todoList li{
   background-color: white;
   margin:8px;
+  padding:5px;
   text-align: left;
   font-weight:600;
-
-
+  border-radius: 15px;
+  
 }
 
+.donebtn{
+  margin-left:160px;
+  margin-right:10px;
+}
 .donebtn,.deletebtn{
-  
-  background-color:white;
+  background-color:#ddd;
+  border-radius: 15px;
   border:0;
   color:black;
   font-size: 8px;
-
 }

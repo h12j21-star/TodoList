@@ -1,10 +1,10 @@
 const Header = document.querySelector('.todoHeader');
 const colorPicker = Header.querySelector('.inpColor');
-const inpName = Header.querySelector('.inpName');
-const pushNameBtn = Header.querySelector('.pushName')
-const introduce = Header.querySelector('.introduce');
-const introduceName = Header.querySelector('.introduce span')
-const userName = Header.querySelector('.name')
+//const inpName = Header.querySelector('.inpName');
+//const pushNameBtn = Header.querySelector('.pushName')
+//const introduce = Header.querySelector('.introduce');
+//const introduceName = Header.querySelector('.introduce span')
+//const userName = Header.querySelector('.name')
 const todoMain = document.querySelector('.todoMain')
 const todoInput = todoMain.querySelector('.inpTodo');
 const pushTodoBtn = todoMain.querySelector('.todoPush');
@@ -49,6 +49,7 @@ function ToDorender(){
     li.id = index 
     const done = document.createElement('button');
     done.textContent="완료"
+    //done.id = `btn-${index}`
     done.className='donebtn'
     const del = document.createElement('button');
     del.textContent="삭제"
@@ -82,19 +83,18 @@ function Selectbtn(){
 function changeState(e){  
   let targetLi = e.target.parentElement
   let state = todoListItem[targetLi.id]['Todos'][0]['State']
-  
   if(state){
       targetLi.classList.remove('done')
-  todoListItem[targetLi.id]['Todos'][0]={
-  ToDo: todoListItem[targetLi.id]['Todos'][0]['ToDo'],
+      todoListItem[targetLi.id]['Todos'][0]={
+      ToDo: todoListItem[targetLi.id]['Todos'][0]['ToDo'],
       State:false
     };   
 }
   else{
     targetLi.classList.add('done')
-  todoListItem[targetLi.id]['Todos'][0]={
-  ToDo: todoListItem[targetLi.id]['Todos'][0]['ToDo'],
-  State:true
+    todoListItem[targetLi.id]['Todos'][0]={
+    ToDo: todoListItem[targetLi.id]['Todos'][0]['ToDo'],
+    State:true
    }
  }
   setStoreItem();
@@ -108,7 +108,11 @@ function SelectDelbtn(){
 }
 function deleteToDo(e){
   let targetLi = e.target.parentElement
+  const li = document.querySelectorAll('.totoList li')
   targetLi.remove();
+  let id = li.id;
+  li.id = id-1 
+  setStoreItem();
   todoListItem.splice(targetLi.id,1)
   setStoreItem();
 }
