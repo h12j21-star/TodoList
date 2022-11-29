@@ -24,6 +24,9 @@ function setStoreItem(){
 }
 
 function changeTodo(){
+  if(todoInput.value === ''){
+    return;
+  }
   const li = document.querySelectorAll('.todoList li')
   li.forEach((li)=>{
     li.remove();
@@ -54,9 +57,9 @@ function ToDorender(){
     li.append(done,del)
     todoList.append(li);
     Selectbtn();
-    SelectDelbtn()
+    SelectDelbtn();
   })
-    checkDone()
+    checkDone();
 }
 
 function checkDone(){
@@ -96,6 +99,7 @@ function changeState(e){
  }
   setStoreItem();
 }
+
 function SelectDelbtn(){
   const statebtn = document.querySelectorAll('.deletebtn');
   statebtn.forEach((btn)=>{
